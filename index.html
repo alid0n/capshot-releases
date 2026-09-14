@@ -412,7 +412,72 @@ td .sub { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2p
 .callout h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
 .callout p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
 
-/* ---------------------------------------------------------------- footer */
+
+  /* ---------------------------------------------------------------- pricing */
+  .plans {
+    display: grid; gap: 16px;
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+    align-items: start;
+  }
+  @media (min-width: 760px) { .plans { grid-template-columns: 1fr 1fr; } }
+
+  .plan {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 22px 22px 24px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  /* The paid plan is the one thing on this page allowed to shout. */
+  .plan.paid {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .plan h3 {
+    font-size: 15px; font-weight: 700; letter-spacing: -.01em;
+    display: flex; align-items: center; gap: 9px;
+  }
+  .plan .tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent);
+    border-radius: 999px; padding: 2px 8px;
+  }
+  .price {
+    font-family: var(--display); font-weight: 800;
+    font-size: 40px; letter-spacing: -.04em;
+    margin: 10px 0 2px; line-height: 1;
+  }
+  .price .per {
+    font-family: var(--body); font-weight: 500;
+    font-size: 13px; letter-spacing: 0; color: var(--muted);
+    margin-left: 7px;
+  }
+  .plan .sub { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+
+  .plan ul { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 9px; }
+  .plan li {
+    display: grid; grid-template-columns: 16px 1fr; gap: 9px;
+    align-items: start; font-size: 14px; line-height: 1.45;
+  }
+  .plan li .m {
+    font-family: var(--mono); font-size: 13px; line-height: 1.45;
+    color: var(--muted);
+  }
+  .plan.paid li .m { color: var(--accent); }
+  .plan li b { font-weight: 600; }
+  .plan li .qual { color: var(--muted); }
+
+  .plan .cta { margin-top: auto; }
+  .plan .cta .btn { width: 100%; justify-content: center; }
+
+  .fineprint {
+    margin-top: 18px; color: var(--muted); font-size: 12.5px;
+    line-height: 1.6; max-width: 62ch;
+  }
+
+  /* ---------------------------------------------------------------- footer */
 footer {
   border-top: 1px solid var(--line);
   padding: 30px 0 44px;
@@ -431,6 +496,7 @@ footer a { color: var(--muted); }
   <div class="mark"></div>
   <div class="wordmark">Capshot</div>
   <div class="spacer"></div>
+  <a href="#pricing" style="margin-right:16px">Pricing</a>
   <a href="#download">Download</a>
 </header>
 
@@ -518,6 +584,65 @@ footer a { color: var(--muted); }
       <div class="fmt">GIF</div>
       <div class="fmt">Animated WebP</div>
     </div>
+  </div>
+</section>
+
+
+<section id="pricing">
+  <div class="wrap">
+    <p class="eyebrow">Pricing</p>
+    <h2 style="font-size:28px;letter-spacing:-.025em;">Free to use. $11.49 to unlock.</h2>
+    <p class="lede" style="margin-top:14px;">
+      One payment, not a subscription. The free version is a real tool, not a trial.
+    </p>
+
+    <div class="plans">
+      <div class="plan">
+        <h3>Free</h3>
+        <div class="price">$0</div>
+        <div class="sub">No account, no trial clock.</div>
+        <ul>
+          <li><span class="m">&#8226;</span><span>Drag any area on any monitor</span></li>
+          <li><span class="m">&#8226;</span><span>Your own start and stop hotkeys</span></li>
+          <li><span class="m">&#8226;</span><span>MP4, MOV, WebM, GIF, WebP</span></li>
+          <li><span class="m">&#8226;</span><span>Record device audio</span></li>
+          <li><span class="m">&#8226;</span><span>Pause and resume mid&#8209;recording</span></li>
+          <li><span class="m">&#8226;</span><span><b>45 seconds</b> per clip <span class="qual">(15 for GIFs)</span></span></li>
+          <li><span class="m">&#8226;</span><span>Up to <b>1080p</b></span></li>
+          <li><span class="m">&#8226;</span><span>Small watermark along the bottom</span></li>
+        </ul>
+        <div class="cta">
+          <a class="btn btn-ghost" href="https://github.com/alid0n/capshot-releases/releases/latest">Download free</a>
+        </div>
+      </div>
+
+      <div class="plan paid">
+        <h3>Premium <span class="tag">one&#8209;time</span></h3>
+        <div class="price">$11.49<span class="per">once, yours forever</span></div>
+        <div class="sub">Everything in Free, without the ceilings.</div>
+        <ul>
+          <li><span class="m">&#43;</span><span><b>No time limit</b> on any format</span></li>
+          <li><span class="m">&#43;</span><span><b>Full resolution</b> &mdash; record 4K if your screen is 4K</span></li>
+          <li><span class="m">&#43;</span><span><b>No watermark</b></span></li>
+          <li><span class="m">&#43;</span><span>Pause hotkey, and move the recording box while paused</span></li>
+          <li><span class="m">&#43;</span><span>Countdown timer before recording</span></li>
+          <li><span class="m">&#43;</span><span>Click highlighting and keystroke overlay</span></li>
+          <li><span class="m">&#43;</span><span>Webcam bubble</span></li>
+          <li><span class="m">&#43;</span><span>Trim the clip before saving</span></li>
+          <li><span class="m">&#43;</span><span>Export presets for YouTube Shorts and X</span></li>
+        </ul>
+        <div class="cta">
+          <a class="btn btn-primary" id="buy" href="https://github.com/alid0n/capshot-releases/releases/latest">Get Premium</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="fineprint">
+      One licence covers your own computers. Buying gives you a key you paste into
+      Settings &mdash; the app checks it once and then keeps working offline.
+      Premium features are being rolled out; the ones listed are what Premium
+      covers when they land.
+    </p>
   </div>
 </section>
 
