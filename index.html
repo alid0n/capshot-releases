@@ -512,55 +512,11 @@ footer a { color: var(--muted); }
 
     <div class="fmts">
       <div class="fmt lead">MP4</div>
+      <div class="fmt">Device audio</div>
       <div class="fmt">MOV</div>
       <div class="fmt">WebM</div>
       <div class="fmt">GIF</div>
       <div class="fmt">Animated WebP</div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="eyebrow">Details that bite</p>
-    <h2 style="font-size:28px;letter-spacing:-.025em;">Things that usually go wrong here</h2>
-    <p class="lede" style="margin-top:14px;">
-      Screen recorders fail in specific, boring ways. These are handled.
-    </p>
-
-    <div class="cards">
-      <div class="card">
-        <h3>Clips that won't play</h3>
-        <p>
-          Stopping a recorder by killing the encoder leaves a file with no
-          index &mdash; right size, plays nowhere. Capshot asks the encoder to
-          finish and waits for it.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Boxes of any shape</h3>
-        <p>
-          H.264 refuses odd pixel dimensions and writes an empty file rather
-          than complain. Drag <code>731 &times; 419</code> and the readout
-          tells you it's recording <code>730 &times; 418</code>.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Your second monitor</h3>
-        <p>
-          A display to the left of your main one lives at negative
-          coordinates. Tested against a real one sitting at
-          <code>-1920, -555</code>.
-        </p>
-      </div>
-      <div class="card">
-        <h3>GIFs that aren't enormous</h3>
-        <p>
-          Default settings elsewhere cost about <code>1.2 MB</code> per
-          second. Capshot builds a proper colour palette and caps the size,
-          so a short clip stays shareable.
-        </p>
-      </div>
     </div>
   </div>
 </section>
