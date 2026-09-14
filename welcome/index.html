@@ -1,0 +1,266 @@
+<title>Your Capshot licence</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* Same token set as the landing page, so this does not look like a page from
+   a different product at the exact moment somebody has just paid. */
+:root {
+  --ground:#faf8f5; --surface:#ffffff; --surface-2:#f1ede7;
+  --ink:#16181d; --ink-2:#3d434e; --muted:#6c7380;
+  --line:#e0dbd3; --line-strong:#cfc8bd;
+  --accent:#d97a1f; --accent-ink:#ffffff; --accent-soft:#fdf0e2;
+  --ok:#2f7d52; --warn:#9a6a12;
+  --radius:10px;
+  --display: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --body: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:#0f1116; --surface:#161920; --surface-2:#1d212a;
+    --ink:#eef1f6; --ink-2:#c3cad6; --muted:#939cab;
+    --line:#262b35; --line-strong:#39404d;
+    --accent:#ff9d4d; --accent-ink:#2a1605; --accent-soft:#241a10;
+    --ok:#5fc98d; --warn:#e0b05a;
+  }
+}
+:root[data-theme="dark"] {
+  --ground:#0f1116; --surface:#161920; --surface-2:#1d212a;
+  --ink:#eef1f6; --ink-2:#c3cad6; --muted:#939cab;
+  --line:#262b35; --line-strong:#39404d;
+  --accent:#ff9d4d; --accent-ink:#2a1605; --accent-soft:#241a10;
+  --ok:#5fc98d; --warn:#e0b05a;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--body); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap { max-width:660px; margin:0 auto; padding:0 24px; }
+
+header.bar {
+  display:flex; align-items:center; gap:12px;
+  padding:20px 24px; max-width:660px; margin:0 auto;
+}
+.mark {
+  width:26px; height:26px; flex:none; border-radius:7px;
+  background:#151a22; position:relative;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+}
+.mark::after {
+  content:''; position:absolute; inset:0; margin:auto;
+  width:9px; height:9px; border-radius:50%; background:#ff9d4d;
+}
+.wordmark { font-family:var(--display); font-weight:800; font-size:17px; letter-spacing:-.02em; }
+
+main { padding: 26px 0 70px; }
+.eyebrow {
+  font-family:var(--mono); font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted); margin:0 0 12px;
+}
+h1 { font-family:var(--display); font-size:30px; letter-spacing:-.02em; margin:0 0 10px; text-wrap:balance; }
+.lede { color:var(--ink-2); margin:0 0 26px; }
+
+.card {
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius); padding:20px; margin-bottom:18px;
+}
+.card h2 { font-family:var(--display); font-size:16px; margin:0 0 4px; }
+.card p { margin:0 0 14px; color:var(--muted); font-size:14px; }
+
+/* The key itself. Monospace, selectable, and big enough to read back over a
+   support email if every other route fails. */
+.keyrow { display:flex; gap:10px; align-items:stretch; flex-wrap:wrap; }
+#key {
+  flex:1; min-width:240px;
+  font-family:var(--mono); font-size:14px;
+  background:var(--surface-2); color:var(--ink);
+  border:1px solid var(--line-strong); border-radius:8px;
+  padding:12px 14px; letter-spacing:.02em;
+  overflow-x:auto; white-space:nowrap;
+}
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family:var(--body); font-weight:600; font-size:15px;
+  text-decoration:none; padding:12px 18px; border-radius:8px;
+  border:1px solid transparent; cursor:pointer;
+  transition: transform .12s ease, background .12s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background:var(--accent); color:var(--accent-ink); }
+.btn-primary:hover { filter:brightness(1.06); }
+.btn-ghost { background:transparent; color:var(--ink); border-color:var(--line-strong); }
+.btn-ghost:hover { background:var(--surface-2); }
+.btn:focus-visible, a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.btn[disabled] { opacity:.5; cursor:default; }
+
+.steps { margin:0; padding-left:20px; color:var(--ink-2); font-size:14.5px; }
+.steps li { margin-bottom:6px; }
+.steps code {
+  font-family:var(--mono); font-size:13px;
+  background:var(--surface-2); padding:1px 5px; border-radius:4px;
+}
+
+.note { font-size:13px; color:var(--muted); margin-top:12px; }
+.ok { color:var(--ok); font-weight:600; }
+#copied { visibility:hidden; font-size:13px; color:var(--ok); font-weight:600; align-self:center; }
+#copied.show { visibility:visible; }
+
+footer { border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:13.5px; }
+footer a { color:var(--muted); }
+
+@media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+</style>
+
+<header class="bar">
+  <div class="mark"></div>
+  <div class="wordmark">Capshot</div>
+</header>
+
+<main class="wrap">
+  <!-- Shown when the receipt link carried a key. -->
+  <div id="haskey" hidden>
+    <p class="eyebrow">Thank you</p>
+    <h1>Your licence key</h1>
+    <p class="lede">
+      One click below and Capshot activates itself. If it is not installed on
+      this computer yet, copy the key and paste it in once it is.
+    </p>
+
+    <div class="card">
+      <h2>Activate</h2>
+      <p>Opens Capshot and applies the key. Nothing to copy or type.</p>
+      <a class="btn btn-primary" id="deeplink" href="#">Activate in Capshot</a>
+      <p class="note" id="deepnote">
+        Your browser may ask permission to open Capshot &mdash; that prompt is
+        what hands the key over, so allow it.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Or copy it</h2>
+      <p>Paste into Capshot &rsaquo; Settings &rsaquo; the licence key field.</p>
+      <div class="keyrow">
+        <div id="key"></div>
+        <button class="btn btn-ghost" id="copy">Copy</button>
+        <span id="copied">Copied</span>
+      </div>
+      <p class="note">
+        This key is also in your purchase email, so you do not need to keep
+        this page open.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Not installed yet?</h2>
+      <p>Windows 10 and 11, 64-bit. The free download becomes the paid version
+        the moment the key goes in.</p>
+      <a class="btn btn-ghost" href="https://github.com/alid0n/capshot-releases/releases/latest/download/Capshot-Setup.exe">Download Capshot</a>
+    </div>
+  </div>
+
+  <!-- Shown when someone lands here without a key. -->
+  <div id="nokey" hidden>
+    <p class="eyebrow">Activation</p>
+    <h1>Where your key lives</h1>
+    <p class="lede">
+      This page normally opens from the button in your purchase email, which
+      brings your licence key with it. Opened on its own, it has nothing to
+      show &mdash; but the key is easy to find.
+    </p>
+    <div class="card">
+      <h2>Activating Capshot</h2>
+      <ol class="steps">
+        <li>Open the purchase email from Lemon Squeezy. The key is printed in it.</li>
+        <li>In Capshot, open <code>Settings</code> from the tray icon.</li>
+        <li>Paste the key into the licence field and press <code>Activate</code>.</li>
+      </ol>
+      <p class="note">
+        Still stuck? Email <a href="mailto:alid0ndev@gmail.com">alid0ndev@gmail.com</a>
+        and include the address you bought with.
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="/">capshot.me</a> &nbsp;&middot;&nbsp;
+    <a href="mailto:alid0ndev@gmail.com">alid0ndev@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict'
+
+  // Same shape the app enforces on the other end. A key that cannot possibly
+  // be real is treated as no key at all rather than rendered into the page.
+  var KEY_SHAPE = /^[A-Za-z0-9-]{8,128}$/
+
+  function readKey () {
+    try {
+      var q = new URLSearchParams(window.location.search)
+      var k = (q.get('key') || '').trim()
+      return KEY_SHAPE.test(k) ? k : null
+    } catch (e) {
+      return null
+    }
+  }
+
+  var key = readKey()
+
+  // Take the key out of the address bar immediately.
+  //
+  // It stays in this page's memory, so everything below still works, but it
+  // stops being part of the URL the browser remembers, shows in the title bar
+  // over someone's shoulder, or hands to the next site in a referrer.
+  if (key && window.history && window.history.replaceState) {
+    try {
+      window.history.replaceState({}, document.title, window.location.pathname)
+    } catch (e) { /* not worth failing over */ }
+  }
+
+  document.getElementById(key ? 'haskey' : 'nokey').hidden = false
+  if (!key) return
+
+  document.getElementById('key').textContent = key
+  document.getElementById('deeplink').href =
+    'capshot://activate?key=' + encodeURIComponent(key)
+
+  var copied = document.getElementById('copied')
+  document.getElementById('copy').addEventListener('click', function () {
+    function done () {
+      copied.classList.add('show')
+      setTimeout(function () { copied.classList.remove('show') }, 2200)
+    }
+    // navigator.clipboard needs a secure context and can be refused outright;
+    // selecting the text is the fallback that always leaves the user able to
+    // press Ctrl+C themselves.
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(key).then(done, selectIt)
+    } else {
+      selectIt()
+    }
+  })
+
+  function selectIt () {
+    var el = document.getElementById('key')
+    try {
+      var r = document.createRange()
+      r.selectNodeContents(el)
+      var sel = window.getSelection()
+      sel.removeAllRanges()
+      sel.addRange(r)
+      copied.textContent = 'Selected — press Ctrl+C'
+      copied.classList.add('show')
+    } catch (e) { /* the key is on screen either way */ }
+  }
+})()
+</script>
