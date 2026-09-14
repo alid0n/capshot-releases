@@ -1,0 +1,740 @@
+<title>Capshot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ---------------------------------------------------------------- tokens */
+:root {
+  /* Light is the base set. Every token is declared here first. */
+  --ground:      #faf8f5;
+  --surface:     #ffffff;
+  --surface-2:   #f1ede7;
+  --ink:         #16181d;
+  --ink-2:       #3d434e;
+  --muted:       #6c7380;
+  --line:        #e0dbd3;
+  --line-strong: #cfc8bd;
+
+  --accent:      #d97a1f;   /* amber, darkened for contrast on light ground */
+  --accent-ink:  #ffffff;
+  --accent-soft: #fdf0e2;
+
+  --screen:      #e9e5df;   /* the mock desktop inside the hero */
+  --screen-chrome: #d5cec4;
+  --dim:         rgba(18, 20, 26, .56);
+
+  --ok:          #2f7d52;
+  --warn:        #9a6a12;
+  --no:          #a03f36;
+
+  --radius:      10px;
+  --maxw:        1080px;
+
+  --display: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --body: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+/* System-dark (no explicit stamp) &mdash; the state most viewers are in. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:      #0f1116;
+    --surface:     #161920;
+    --surface-2:   #1d212a;
+    --ink:         #eef1f6;
+    --ink-2:       #c3cad6;
+    --muted:       #939cab;
+    --line:        #262b35;
+    --line-strong: #39404d;
+
+    --accent:      #ff9d4d;
+    --accent-ink:  #2a1605;
+    --accent-soft: #241a10;
+
+    --screen:      #1b1f27;
+    --screen-chrome: #2a2f3a;
+    --dim:         rgba(6, 8, 12, .62);
+
+    --ok:          #5fc98d;
+    --warn:        #e0b05a;
+    --no:          #ef8279;
+  }
+}
+
+/* Explicit dark choice wins over a light OS. */
+:root[data-theme="dark"] {
+  --ground:      #0f1116;
+  --surface:     #161920;
+  --surface-2:   #1d212a;
+  --ink:         #eef1f6;
+  --ink-2:       #c3cad6;
+  --muted:       #939cab;
+  --line:        #262b35;
+  --line-strong: #39404d;
+
+  --accent:      #ff9d4d;
+  --accent-ink:  #2a1605;
+  --accent-soft: #241a10;
+
+  --screen:      #1b1f27;
+  --screen-chrome: #2a2f3a;
+  --dim:         rgba(6, 8, 12, .62);
+
+  --ok:          #5fc98d;
+  --warn:        #e0b05a;
+  --no:          #ef8279;
+}
+
+/* ------------------------------------------------------------- structure */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+section { padding: 60px 0; }
+section + section { border-top: 1px solid var(--line); }
+
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+
+/* ------------------------------------------------------------------ nav */
+header.bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 20px 28px;
+  max-width: var(--maxw); margin: 0 auto;
+}
+.mark {
+  width: 26px; height: 26px; flex: none;
+  border-radius: 7px;
+  background: #151a22;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+}
+.mark::after {
+  content: ''; position: absolute; inset: 0; margin: auto;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #ff9d4d;
+}
+.wordmark {
+  font-family: var(--display); font-weight: 800;
+  font-size: 17px; letter-spacing: -.02em;
+}
+.bar .spacer { flex: 1; }
+.bar a {
+  color: var(--muted); text-decoration: none;
+  font-size: 14px;
+}
+.bar a:hover { color: var(--ink); }
+
+/* ----------------------------------------------------------------- hero */
+.hero { padding: 26px 0 56px; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 34px;
+}
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: 0.92fr 1.08fr; gap: 44px; align-items: center; }
+}
+
+h1 {
+  font-size: clamp(40px, 6.2vw, 62px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.035em;
+}
+h1 .amber { color: var(--accent); }
+
+.lede {
+  font-size: 18px;
+  color: var(--ink-2);
+  margin: 18px 0 0;
+  max-width: 46ch;
+}
+
+/* ---- the capture surface: this page's one big idea ---- */
+.stage {
+  position: relative;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--screen);
+  aspect-ratio: 16 / 10;
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+}
+
+/* a plausible desktop behind the dim, kept deliberately quiet */
+.desk { position: absolute; inset: 0; }
+.win {
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--screen-chrome);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.win .chrome {
+  height: 17px;
+  background: var(--screen-chrome);
+  display: flex; align-items: center; gap: 4px;
+  padding: 0 6px;
+}
+.win .chrome i {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--muted); opacity: .55;
+}
+.win .body { padding: 9px; display: grid; gap: 6px; }
+.win .body span {
+  display: block; height: 5px; border-radius: 3px;
+  background: var(--line);
+}
+
+.dim {
+  position: absolute; inset: 0;
+  background: var(--dim);
+}
+
+.sel {
+  position: absolute;
+  border: 1px solid #fff;
+  box-shadow: 0 0 0 9999px var(--dim);
+  pointer-events: none;
+}
+.sel::before, .sel::after {
+  content: ''; position: absolute;
+  width: 11px; height: 11px;
+  border: 2px solid #fff;
+}
+.sel::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.sel::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+.readout {
+  position: absolute;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  background: #12151a;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 5px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+.readout .snap { color: #ffcf70; }
+
+.stage-hint {
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  bottom: 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: rgba(255,255,255,.88);
+  background: rgba(12,15,20,.8);
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 999px;
+  padding: 6px 13px;
+  pointer-events: none;
+  transition: opacity .18s;
+}
+.stage.dragging .stage-hint { opacity: 0; }
+
+/* --------------------------------------------------------------- buttons */
+.dl-row {
+  display: flex; flex-wrap: wrap; gap: 11px;
+  margin-top: 26px;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--body); font-weight: 600; font-size: 15px;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: transform .12s ease, background .12s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { filter: brightness(1.06); }
+.btn-ghost {
+  background: transparent; color: var(--ink);
+  border-color: var(--line-strong);
+}
+.btn-ghost:hover { background: var(--surface-2); }
+.btn small {
+  font-family: var(--mono); font-weight: 400;
+  font-size: 11px; opacity: .8;
+}
+.btn:focus-visible, a:focus-visible, .stage:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.meta {
+  font-family: var(--mono); font-size: 12px;
+  color: var(--muted); margin-top: 13px;
+}
+
+/* ----------------------------------------------------------------- loop */
+.loop {
+  display: grid; gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 760px) { .loop { grid-template-columns: repeat(4, 1fr); } }
+
+.step {
+  background: var(--surface);
+  padding: 20px 18px 22px;
+  display: flex; flex-direction: column; gap: 7px;
+}
+.step .n {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--accent); letter-spacing: .1em;
+}
+.step h3 { font-size: 16px; font-weight: 700; letter-spacing: -.01em; }
+.step p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+kbd {
+  font-family: var(--mono); font-size: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 1px 6px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------- formats */
+.fmts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.fmt {
+  font-family: var(--mono); font-size: 12.5px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 6px 11px;
+  color: var(--ink-2);
+  background: var(--surface);
+}
+.fmt.lead { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
+/* ---------------------------------------------------------------- handled */
+.cards {
+  display: grid; gap: 14px;
+  grid-template-columns: 1fr;
+  margin-top: 26px;
+}
+@media (min-width: 680px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 19px 20px;
+  background: var(--surface);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.card h3 { font-size: 15.5px; font-weight: 700; letter-spacing: -.01em; }
+.card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.55; }
+.card code {
+  font-family: var(--mono); font-size: 12.5px;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  padding: 1px 5px; border-radius: 4px;
+}
+
+/* --------------------------------------------------------------- support */
+.tablewrap { overflow-x: auto; margin-top: 24px; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 14px; min-width: 640px;
+}
+th, td {
+  text-align: left; padding: 11px 13px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+thead th {
+  font-family: var(--mono); font-weight: 500;
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line-strong);
+  white-space: nowrap;
+}
+tbody th { font-weight: 600; white-space: nowrap; }
+td .sub { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+
+.pill {
+  display: inline-block;
+  font-family: var(--mono); font-size: 11px;
+  padding: 2px 8px; border-radius: 999px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.pill.ok { color: var(--ok); }
+.pill.warn { color: var(--warn); }
+.pill.no { color: var(--no); }
+
+.callout {
+  margin-top: 26px;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 17px 20px;
+}
+.callout h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.callout p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* ---------------------------------------------------------------- footer */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 30px 0 44px;
+  color: var(--muted); font-size: 13.5px;
+}
+footer .wrap { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+footer .spacer { flex: 1; }
+footer a { color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<header class="bar">
+  <div class="mark"></div>
+  <div class="wordmark">Capshot</div>
+  <div class="spacer"></div>
+  <a href="#download">Download</a>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Drag a box.<br>Get the <span class="amber">clip</span>.</h1>
+      <p class="lede">
+        A screen recorder that lives in your tray. Click it, drag a rectangle
+        around anything, and it records just that &mdash; until you press the hotkey
+        you picked yourself.
+      </p>
+
+      <div class="dl-row" id="download">
+        <a class="btn btn-primary" href="https://github.com/alid0n/capshot-releases/releases/latest">
+          Download for Windows <small>127 MB</small>
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/alid0n/capshot-releases/releases/latest">
+          Portable <small>no install</small>
+        </a>
+      </div>
+      <p class="meta">v0.1.0 &middot; Windows 10 and 11, 64-bit &middot; ffmpeg included</p>
+    </div>
+
+    <div>
+      <div class="stage" id="stage" tabindex="0" aria-label="Interactive demo: drag to draw a selection rectangle">
+        <div class="desk">
+          <div class="win" style="left:6%;  top:9%;  width:46%; height:44%;">
+            <div class="chrome"><i></i><i></i><i></i></div>
+            <div class="body">
+              <span style="width:82%"></span><span style="width:64%"></span>
+              <span style="width:73%"></span><span style="width:41%"></span>
+            </div>
+          </div>
+          <div class="win" style="left:40%; top:33%; width:52%; height:52%;">
+            <div class="chrome"><i></i><i></i><i></i></div>
+            <div class="body">
+              <span style="width:57%"></span><span style="width:88%"></span>
+              <span style="width:70%"></span><span style="width:79%"></span>
+              <span style="width:46%"></span>
+            </div>
+          </div>
+        </div>
+        <div class="sel" id="sel"></div>
+        <div class="readout" id="readout"></div>
+        <div class="stage-hint">drag anywhere in here</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The whole thing</p>
+    <h2 style="font-size:28px;letter-spacing:-.025em;">Four moves, then it's a file</h2>
+
+    <div class="loop" style="margin-top:26px;">
+      <div class="step">
+        <div class="n">01</div>
+        <h3>Click the tray icon</h3>
+        <p>Or press <kbd>Ctrl + Shift + Z</kbd> without reaching for the mouse.</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h3>Drag a box</h3>
+        <p>The screen dims, the size follows your cursor. <kbd>Esc</kbd> backs out.</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h3>Press your hotkey</h3>
+        <p>Whatever you bound it to. <kbd>Ctrl + Shift + X</kbd> until you change it.</p>
+      </div>
+      <div class="step">
+        <div class="n">04</div>
+        <h3>It's in your folder</h3>
+        <p>The one you chose. Click the notification to jump straight to it.</p>
+      </div>
+    </div>
+
+    <div class="fmts">
+      <div class="fmt lead">MP4</div>
+      <div class="fmt">MOV</div>
+      <div class="fmt">WebM</div>
+      <div class="fmt">GIF</div>
+      <div class="fmt">Animated WebP</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Details that bite</p>
+    <h2 style="font-size:28px;letter-spacing:-.025em;">Things that usually go wrong here</h2>
+    <p class="lede" style="margin-top:14px;">
+      Screen recorders fail in specific, boring ways. These are handled.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Clips that won't play</h3>
+        <p>
+          Stopping a recorder by killing the encoder leaves a file with no
+          index &mdash; right size, plays nowhere. Capshot asks the encoder to
+          finish and waits for it.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Boxes of any shape</h3>
+        <p>
+          H.264 refuses odd pixel dimensions and writes an empty file rather
+          than complain. Drag <code>731 &times; 419</code> and the readout
+          tells you it's recording <code>730 &times; 418</code>.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Your second monitor</h3>
+        <p>
+          A display to the left of your main one lives at negative
+          coordinates. Tested against a real one sitting at
+          <code>-1920, -555</code>.
+        </p>
+      </div>
+      <div class="card">
+        <h3>GIFs that aren't enormous</h3>
+        <p>
+          Default settings elsewhere cost about <code>1.2 MB</code> per
+          second. Capshot builds a proper colour palette and caps the size,
+          so a short clip stays shareable.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Where it runs</p>
+    <h2 style="font-size:28px;letter-spacing:-.025em;">Honest platform support</h2>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Status</th>
+            <th>Drag on screen</th>
+            <th>Your own hotkey</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Windows 10 / 11</th>
+            <td><span class="pill ok">Available</span></td>
+            <td>Yes</td>
+            <td>Yes, system-wide</td>
+          </tr>
+          <tr>
+            <th>macOS</th>
+            <td><span class="pill warn">In progress</span></td>
+            <td>Yes
+              <span class="sub">Needs Screen Recording permission</span>
+            </td>
+            <td>Yes, system-wide</td>
+          </tr>
+          <tr>
+            <th>Linux &middot; X11</th>
+            <td><span class="pill warn">In progress</span></td>
+            <td>Yes</td>
+            <td>Yes, system-wide</td>
+          </tr>
+          <tr>
+            <th>Linux &middot; Wayland</th>
+            <td><span class="pill warn">In progress</span></td>
+            <td>Partly
+              <span class="sub">Your desktop picks the screen first, then you crop</span>
+            </td>
+            <td>Through the desktop's own shortcut settings</td>
+          </tr>
+          <tr>
+            <th>ChromeOS</th>
+            <td><span class="pill no">Web version only</span></td>
+            <td>No
+              <span class="sub">Chrome picks the source, then you crop</span>
+            </td>
+            <td>No
+              <span class="sub">On-screen stop button instead</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <h3>Why ChromeOS is different</h3>
+      <p>
+        ChromeOS doesn't let an installed app see the rest of the screen &mdash; a
+        Linux app in the container would launch happily and record a black
+        rectangle. So the Chromebook version is a web app, which can record
+        and save to your folder, but can't sit in your shelf waiting or claim
+        a keyboard shortcut across the whole system. Those two are real
+        losses and it's better to say so here than to let you find out after
+        downloading.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="mark" style="width:20px;height:20px;border-radius:6px;"></div>
+    <span>Capshot</span>
+    <div class="spacer"></div>
+    <span>capshot.me</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict'
+  var stage = document.getElementById('stage')
+  var sel = document.getElementById('sel')
+  var readout = document.getElementById('readout')
+
+  // The stage stands in for a 1920x1080 screen, so the numbers the demo
+  // reports are the numbers the app would actually capture.
+  var VW = 1920, VH = 1080
+
+  var dragging = false
+  var sx = 0, sy = 0
+
+  function place (r) {
+    sel.style.left = r.x + 'px'
+    sel.style.top = r.y + 'px'
+    sel.style.width = r.w + 'px'
+    sel.style.height = r.h + 'px'
+
+    var box = stage.getBoundingClientRect()
+    var pw = Math.round(r.w / box.width * VW)
+    var ph = Math.round(r.h / box.height * VH)
+
+    // Mirror the real even-snapping rule: shrink to even, and say so.
+    var ew = Math.max(2, Math.floor(pw / 2) * 2)
+    var eh = Math.max(2, Math.floor(ph / 2) * 2)
+    var snapped = (ew !== pw || eh !== ph)
+
+    readout.innerHTML = ew + ' &times; ' + eh +
+      (snapped ? ' <span class="snap">even-snapped</span>' : '')
+
+    var rw = readout.offsetWidth || 96
+    var rh = readout.offsetHeight || 22
+    var lx = Math.min(r.x, box.width - rw - 4)
+    var ly = r.y - rh - 7
+    if (ly < 4) ly = Math.min(r.y + r.h + 7, box.height - rh - 4)
+    readout.style.left = Math.max(4, lx) + 'px'
+    readout.style.top = Math.max(4, ly) + 'px'
+  }
+
+  function norm (x1, y1, x2, y2) {
+    return {
+      x: Math.min(x1, x2), y: Math.min(y1, y2),
+      w: Math.abs(x2 - x1), h: Math.abs(y2 - y1)
+    }
+  }
+
+  function local (e) {
+    var b = stage.getBoundingClientRect()
+    var p = e.touches ? e.touches[0] : e
+    return {
+      x: Math.max(0, Math.min(p.clientX - b.left, b.width)),
+      y: Math.max(0, Math.min(p.clientY - b.top, b.height))
+    }
+  }
+
+  function down (e) {
+    var p = local(e)
+    dragging = true; sx = p.x; sy = p.y
+    stage.classList.add('dragging')
+    place(norm(sx, sy, sx, sy))
+    e.preventDefault()
+  }
+  function move (e) {
+    if (!dragging) return
+    var p = local(e)
+    place(norm(sx, sy, p.x, p.y))
+    e.preventDefault()
+  }
+  function up () { dragging = false; stage.classList.remove('dragging') }
+
+  stage.addEventListener('mousedown', down)
+  window.addEventListener('mousemove', move)
+  window.addEventListener('mouseup', up)
+  stage.addEventListener('touchstart', down, { passive: false })
+  window.addEventListener('touchmove', move, { passive: false })
+  window.addEventListener('touchend', up)
+
+  // The page must show a selection at rest, not an empty screen waiting
+  // for someone to discover it is interactive.
+  function rest () {
+    var b = stage.getBoundingClientRect()
+    if (!b.width) return
+    place({ x: b.width * 0.20, y: b.height * 0.24, w: b.width * 0.53, h: b.height * 0.45 })
+  }
+  rest()
+  window.addEventListener('resize', function () { if (!dragging) rest() })
+  window.addEventListener('load', rest)
+})()
+</script>
